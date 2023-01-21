@@ -1,0 +1,11 @@
+lost_fights=int(input())
+helmet_price=float(input())
+sword_price=float(input())
+shield_price=float(input())
+armor_price=float(input())
+expenses=0
+expenses+=helmet_price*(lost_fights//2)
+expenses+=sword_price*(lost_fights//3)
+expenses+=shield_price*(lost_fights//6)
+expenses+=armor_price*(lost_fights//12)
+print(f"Gladiator expenses: {expenses:.2f} aureus")
