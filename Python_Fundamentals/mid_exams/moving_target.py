@@ -7,7 +7,6 @@ while command != 'End':
         index = int(command_list[1])
         power = int(command_list[2])
         if index < 0 or index >= len(sequence_targets):
-            print("Invalid placement!")
             command = input()
             continue
         sequence_targets[index] -= power
@@ -20,19 +19,16 @@ while command != 'End':
             print("Invalid placement!")
             command = input()
             continue
-    if action == "Strike":
+        sequence_targets.insert(index, value)
+    elif action == "Strike":
         index = int(command_list[1])
         radius = int(command_list[2])
-        if index < 0 or index >= len(sequence_targets):
-            print("Strike missed!")
-            command = input()
-            continue
-        elif index - radius < 0 or index + radius >= len(sequence_targets):
+        if index - radius < 0 or index + radius >= len(sequence_targets):
             print("Strike missed!")
             command = input()
             continue
         else:
             sequence_targets = sequence_targets[:index - radius] + sequence_targets[index + radius + 1:]
     command = input()
-sequence_targets=list(map(str,sequence_targets))
+sequence_targets = list(map(str, sequence_targets))
 print("|".join(sequence_targets))

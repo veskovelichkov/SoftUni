@@ -1,25 +1,33 @@
-loot_list = list(map(str, input().split("|")))
+initial_loot = list(map(str, input().split("|")))
 command = input()
 while command != "Yohoho!":
-    command_list = command.split(" ")
-    event = command_list[0]
-    if event == 'Loot':
-        for index in range(1, len(command_list)):
-            if command_list[index] not in loot_list:
-                loot_list.insert(0, command_list[index])
-    elif event == 'Drop':
-        index = int(command_list[1])
-        if index >= len(loot_list):
+    command_split = command.split(" ")
+    action = command_split[0]
+    if action == "Loot":
+        for i in range(1, len(command_split)):
+            if command_split[i] not in initial_loot:
+                initial_loot.insert(0, command_split[i])
+    elif action == "Drop":
+        index = int(command_split[1])
+        if abs(index) >= len(initial_loot):
+            command = input()
             continue
+        initial_loot.append(initial_loot[index])
+        initial_loot.pop(index)
+    elif action == "Steal":
+        count = int(command_split[1])
+        if count >= len(initial_loot):
+            print(", ".join(initial_loot))
+            initial_loot = []
         else:
-            loot_list.append(loot_list[index])
-            loot_list.pop(index)
-    elif event=='Steal':
-        count=int(command_list[1])
-        if count>len(loot_list):
-            print(', '.join(loot_list))
-            loot_list=[]
-        else:
-            print(', '.join(loot_list[count-1:]))
-            loot_list=loot_list[:-count]
+            stolen_items = initial_loot[len(initial_loot) - count:]
+            print(", ".join(stolen_items))
+            initial_loot = initial_loot[:len(initial_loot) - count]
     command = input()
+sum_lenght = 0
+for value in initial_loot:
+    sum_lenght += len(value)
+if sum_lenght > 0:
+    print(f"Average treasure gain: {sum_lenght / len(initial_loot):.2f} pirate credits.")
+else:
+    print("Failed treasure hunt.")
