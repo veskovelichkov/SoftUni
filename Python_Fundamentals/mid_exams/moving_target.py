@@ -15,7 +15,7 @@ while command != 'End':
     elif action == "Add":
         index = int(command_list[1])
         value = int(command_list[2])
-        if index < 0 or index > len(sequence_targets):
+        if index < 0 or index >= len(sequence_targets):
             print("Invalid placement!")
             command = input()
             continue

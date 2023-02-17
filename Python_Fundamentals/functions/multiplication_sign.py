@@ -10,9 +10,9 @@ def is_negative(first, second, third):
     negative_found = False
     if first != abs(first):
         counter_negative += 1
-    if second != abs(first):
+    if second != abs(second):
         counter_negative += 1
-    if third != abs(first):
+    if third != abs(third):
         counter_negative += 1
     if counter_negative == 1 or counter_negative == 3:
         negative_found = True
